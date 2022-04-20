@@ -102,6 +102,22 @@ func NewArgs() Args {
 	return Args{Style, Heteronym, Separator, Fallback}
 }
 
+// XPinyin 返回中文的拼音首字母和完整拼音字符串
+func XPinyin(s string) (string string) {
+	return strings.Join(LazyPinyin(s, Args{
+			Style:     FirstLetter,
+			Heteronym: false,
+			Separator: "-",
+			Fallback:  Fallback,
+		}), ""),
+		strings.Join(LazyPinyin(s, Args{
+			Style:     Normal,
+			Heteronym: false,
+			Separator: "-",
+			Fallback:  Fallback,
+		}), "")
+}
+
 // 获取单个拼音中的声母
 func initial(p string) string {
 	s := ""

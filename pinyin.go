@@ -28,16 +28,16 @@ const (
 )
 
 // 拼音风格(兼容之前的版本)
-const (
-	NORMAL       = Normal
-	TONE         = Tone
-	TONE2        = Tone2
-	INITIALS     = Initials
-	FIRST_LETTER = FirstLetter
-	FINALS       = Finals
-	FINALS_TONE  = FinalsTone
-	FINALS_TONE2 = FinalsTone2
-)
+// const (
+// 	NORMAL       = Normal
+// 	TONE         = Tone
+// 	TONE2        = Tone2
+// 	INITIALS     = Initials
+// 	FIRST_LETTER = FirstLetter
+// 	FINALS       = Finals
+// 	FINALS_TONE  = FinalsTone
+// 	FINALS_TONE2 = FinalsTone2
+// )
 
 // 声母表
 var initialArray = strings.Split(
@@ -103,7 +103,7 @@ func NewArgs() Args {
 }
 
 // XPinyin 返回中文的拼音首字母和完整拼音字符串
-func XPinyin(s string) (string string) {
+func XPinyin(s string) (string, string) {
 	return strings.Join(LazyPinyin(s, Args{
 			Style:     FirstLetter,
 			Heteronym: false,

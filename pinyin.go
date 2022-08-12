@@ -13,6 +13,18 @@ const (
 	Copyright = "Copyright (c) 2016 mozillazg, 闲耘"
 )
 
+// ReturnType 返回的拼音类型
+type ReturnType int
+
+var (
+	// ReturnFirstLetter 仅返回首字母
+	ReturnFirstLetter PType = 0
+	// ReturnNormal 仅返回全拼
+	ReturnNormal PType = 1
+	// ReturnAll 返回首字母+全拼
+	ReturnAll PType = 2
+)
+
 // 拼音风格(推荐)
 const (
 	Normal      = 0 // 普通风格，不带声调（默认风格）。如： zhong guo
@@ -85,7 +97,7 @@ var Separator = "-"
 
 // Fallback 默认配置: 如何处理没有拼音的字符(忽略这个字符)
 var Fallback = func(r rune, a Args) []string {
-	return []string{}
+	return []string{string(r)}
 }
 
 var finalExceptionsMap = map[string]string{
@@ -103,19 +115,46 @@ func NewArgs() Args {
 }
 
 // XPinyin 返回中文的拼音首字母和完整拼音字符串
-func XPinyin(s string) (string, string) {
-	return strings.Join(LazyPinyin(s, Args{
-			Style:     FirstLetter,
-			Heteronym: false,
-			Separator: "-",
-			Fallback:  Fallback,
-		}), ""),
-		strings.Join(LazyPinyin(s, Args{
+// s: 需要转换的字符串
+// t
+func XPinyin(s string, t PType) string {
+	switch t {
+	case PNormal:
+		return strings.Join(LazyPinyin(s, Args{
 			Style:     Normal,
 			Heteronym: false,
 			Separator: "-",
 			Fallback:  Fallback,
 		}), "")
+	case PFirstLetter:
+		return strings.Join(LazyPinyin(s, Args{
+			Style:     FirstLetter,
+			Heteronym: false,
+			Separator: "-",
+			Fallback:  Fallback,
+		}), "")
+	default:
+		return strings.Join(LazyPinyin(s, Args{
+			Style:     FirstLetter,
+			Heteronym: false,
+			Separator: "-",
+			Fallback:  Fallback,
+		}), "") + " " +
+			strings.Join(LazyPinyin(s, Args{
+				Style:     Normal,
+				Heteronym: false,
+				Separator: "-",
+				Fallback:  Fallback,
+			}), "")
+	}
+}
+
+// XPinyinMatch 拼音全拼和首字母匹配
+func XPinyinMatch(s, substr string) bool {
+	if substr == "" {
+		return true
+	}
+	return strings.Contains(XPinyin(s, ReturnFirstLetter), substr) || strings.Contains(XPinyin(s, ReturnNormal), substr)
 }
 
 // 获取单个拼音中的声母

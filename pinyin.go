@@ -18,11 +18,11 @@ type ReturnType int
 
 var (
 	// ReturnFirstLetter 仅返回首字母
-	ReturnFirstLetter PType = 0
+	ReturnFirstLetter ReturnType = 0
 	// ReturnNormal 仅返回全拼
-	ReturnNormal PType = 1
+	ReturnNormal ReturnType = 1
 	// ReturnAll 返回首字母+全拼
-	ReturnAll PType = 2
+	ReturnAll ReturnType = 2
 )
 
 // 拼音风格(推荐)
@@ -117,16 +117,16 @@ func NewArgs() Args {
 // XPinyin 返回中文的拼音首字母和完整拼音字符串
 // s: 需要转换的字符串
 // t
-func XPinyin(s string, t PType) string {
+func XPinyin(s string, t ReturnType) string {
 	switch t {
-	case PNormal:
+	case ReturnNormal:
 		return strings.Join(LazyPinyin(s, Args{
 			Style:     Normal,
 			Heteronym: false,
 			Separator: "-",
 			Fallback:  Fallback,
 		}), "")
-	case PFirstLetter:
+	case ReturnFirstLetter:
 		return strings.Join(LazyPinyin(s, Args{
 			Style:     FirstLetter,
 			Heteronym: false,

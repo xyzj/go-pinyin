@@ -115,8 +115,10 @@ func NewArgs() Args {
 }
 
 // XPinyin 返回中文的拼音首字母和完整拼音字符串
+//
 // s: 需要转换的字符串
-// t
+//
+// t: 返回的格式
 func XPinyin(s string, t ReturnType) string {
 	switch t {
 	case ReturnNormal:
@@ -149,7 +151,12 @@ func XPinyin(s string, t ReturnType) string {
 	}
 }
 
-// XPinyinMatch 拼音全拼和首字母匹配
+// XPinyinMatch 检查字符串的拼音首字母和全拼是否匹配输入值
+// s: 中文字符串
+//
+// substr: 匹配项
+//
+// 返回： true:匹配, false: 不匹配
 func XPinyinMatch(s, substr string) bool {
 	if substr == "" {
 		return true

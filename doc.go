@@ -6,35 +6,19 @@ Usage
 	package main
 
 	import (
-		"fmt"
-		"github.com/mozillazg/go-pinyin"
+		"github.com/xyzj/go-pinyin"
 	)
 
 	func main() {
 		hans := "中国人"
-		// 默认
-		a := pinyin.NewArgs()
-		fmt.Println(pinyin.Pinyin(hans, a))
-		// [[zhong] [guo] [ren]]
+		println(pinyin.XPinyin(hans, pinyin.ReturnNormal))
+		// zhongguoren
 
-		// 包含声调
-		a.Style = pinyin.Tone
-		fmt.Println(pinyin.Pinyin(hans, a))
-		// [[zhōng] [guó] [rén]]
+		println(pinyin.XPinyin(hans, pinyin.ReturnFirstLetter))
+		// zgr
 
-		// 声调用数字表示
-		a.Style = pinyin.Tone2
-		fmt.Println(pinyin.Pinyin(hans, a))
-		// [[zho1ng] [guo2] [re2n]]
-
-		// 开启多音字模式
-		a = pinyin.NewArgs()
-		a.Heteronym = true
-		fmt.Println(pinyin.Pinyin(hans, a))
-		// [[zhong zhong] [guo] [ren]]
-		a.Style = pinyin.Tone2
-		fmt.Println(pinyin.Pinyin(hans, a))
-		// [[zho1ng zho4ng] [guo2] [re2n]]
+		println(pinyin.XPinyin(hans, pinyin.ReturnAll))
+		// zgr zhongguoren
 	}
 */
 package pinyin

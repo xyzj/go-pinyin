@@ -20,7 +20,17 @@ func genCode(inFile *os.File, outFile *os.File) {
 
 // PinyinDict is data map
 // Warning: Auto-generated file, don't edit.
-var PinyinDict = map[int]string{
+
+// GetPinyin return pinyin
+func GetPinyin(r rune) []string {
+	x, ok := pinyinDict[r]
+	if ok {
+		return strings.Split(x,",")
+	}
+	return []string{string(r)}
+}
+
+var pinyinDict = map[rune]string{
 `
 	lines := []string{}
 
@@ -42,6 +52,7 @@ var PinyinDict = map[int]string{
 		hexCode := strings.Replace(dataSlice[0], "U+", "0x", 1)
 		// zhōng,zhòng
 		pinyin := dataSlice[1]
+		// lines = append(lines, fmt.Sprintf("\t%s: \"%s\",", hexCode, pinyin))
 		lines = append(lines, fmt.Sprintf("\t%s: \"%s\",", hexCode, pinyin))
 	}
 

@@ -1,5 +1,7 @@
 package pinyin
 
+import "strings"
+
 // 带音标字符。
 var phoneticSymbol = map[string]string{
 	"ā": "a1",
@@ -31,3 +33,34 @@ var phoneticSymbol = map[string]string{
 	"ǹ": "n4",
 	"ḿ": "m2",
 }
+
+var toneReplacer = strings.NewReplacer(
+	"ā", "a",
+	"á", "a",
+	"ǎ", "a",
+	"à", "a",
+	"ē", "e",
+	"é", "e",
+	"ě", "e",
+	"è", "e",
+	"ō", "o",
+	"ó", "o",
+	"ǒ", "o",
+	"ò", "o",
+	"ī", "i",
+	"í", "i",
+	"ǐ", "i",
+	"ì", "i",
+	"ū", "u",
+	"ú", "u",
+	"ǔ", "u",
+	"ù", "u",
+	"ü", "v",
+	"ǘ", "v",
+	"ǚ", "v",
+	"ǜ", "v",
+	"ń", "n",
+	"ň", "n",
+	"ǹ", "n",
+	"ḿ", "m",
+)

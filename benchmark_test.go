@@ -33,40 +33,29 @@ var hans500 = strings.Replace(strings.Replace(`
 圆、包、火、住、调、满、县、局、照、参、红、细、引、听、该、铁、价、严、龙、飞
 `, "、", "", -1), "\n", "", -1)
 
-func benchmarkPinyin(b *testing.B, s string, args Args) {
+func BenchmarkPinyin(b *testing.B) {
 	b.StopTimer()
 	b.StartTimer()
 
 	for i := 0; i < b.N; i++ {
-		Pinyin(s, args)
+		XPinyin(hans500, ReturnNormal)
 	}
 }
 
-func benchmarkLazyPinyin(b *testing.B, s string, args Args) {
+func BenchmarkPinyinFL(b *testing.B) {
 	b.StopTimer()
 	b.StartTimer()
 
 	for i := 0; i < b.N; i++ {
-		LazyPinyin(s, args)
+		XPinyin(hans500, ReturnFirstLetter)
 	}
 }
 
 func BenchmarkPinyinOne(b *testing.B) {
-	args := NewArgs()
-	benchmarkPinyin(b, "中", args)
-}
+	b.StopTimer()
+	b.StartTimer()
 
-func BenchmarkPinyin500(b *testing.B) {
-	args := NewArgs()
-	benchmarkPinyin(b, hans500, args)
-}
-
-func BenchmarkLazyPinyinOne(b *testing.B) {
-	args := NewArgs()
-	benchmarkLazyPinyin(b, "中", args)
-}
-
-func BenchmarkLazyPinyin500(b *testing.B) {
-	args := NewArgs()
-	benchmarkLazyPinyin(b, hans500, args)
+	for i := 0; i < b.N; i++ {
+		XPinyin(hans500, ReturnFirstLetter)
+	}
 }

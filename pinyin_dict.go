@@ -1,8 +1,20 @@
 package pinyin
 
+import "strings"
+
 // PinyinDict is data map
 // Warning: Auto-generated file, don't edit.
-var PinyinDict = map[int]string{
+
+// GetPinyin return pinyin
+func GetPinyin(r rune) []string {
+	x, ok := pinyinDict[r]
+	if ok {
+		return strings.Split(x, ",")
+	}
+	return []string{string(r)}
+}
+
+var pinyinDict = map[rune]string{
 	0x3007:  "líng,yuán,xīng",
 	0x3400:  "qiū",
 	0x3401:  "tiàn",
@@ -24064,7 +24076,7 @@ var PinyinDict = map[int]string{
 	0x9574:  "là",
 	0x9575:  "chán",
 	0x9576:  "xiāng",
-	0x9577:  "cháng,zhǎng,zhàng",
+	0x9577:  "zhǎng,cháng,zhàng",
 	0x9578:  "cháng",
 	0x9579:  "jiǔ",
 	0x957A:  "ǎo",
@@ -24072,7 +24084,7 @@ var PinyinDict = map[int]string{
 	0x957C:  "qū",
 	0x957D:  "liǎo,liáo",
 	0x957E:  "mí",
-	0x957F:  "cháng,zhǎng",
+	0x957F:  "zhǎng,cháng",
 	0x9580:  "mén",
 	0x9581:  "mà",
 	0x9582:  "shuān",

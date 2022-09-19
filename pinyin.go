@@ -6,10 +6,10 @@ import (
 
 // Meta
 const (
-	Version   = "0.19.0"
-	Author    = "mozillazg, 闲耘"
-	License   = "MIT"
-	Copyright = "Copyright (c) 2016 mozillazg, 闲耘"
+	version   = "0.19.0"
+	author    = "mozillazg, 闲耘"
+	license   = "MIT"
+	copyright = "Copyright (c) 2016 mozillazg, 闲耘"
 )
 
 // ReturnType 返回的拼音类型
@@ -127,7 +127,7 @@ func XPinyin(s string, t ReturnType) string {
 		for _, r := range s {
 			ss = append(ss, GetPinyin(r)[0])
 		}
-		return toneReplacer.Replace(strings.Join(ss, ""))
+		return strings.Join(ss, "")
 	case ReturnFirstLetter:
 		for _, r := range s {
 			ss = append(ss, string(GetPinyin(r)[0][0]))
@@ -146,7 +146,7 @@ func XPinyin(s string, t ReturnType) string {
 		for _, r := range s {
 			ss1 = append(ss1, string(GetPinyin(r)[0][0]))
 		}
-		return toneReplacer.Replace(strings.Join(ss, "")) + " " + strings.Join(ss1, "")
+		return strings.Join(ss, "") + " " + strings.Join(ss1, "")
 	}
 }
 

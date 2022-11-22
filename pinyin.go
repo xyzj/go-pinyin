@@ -160,7 +160,7 @@ func XPinyinMatch(s, substr string) bool {
 	if substr == "" {
 		return true
 	}
-	return strings.Contains(XPinyin(s, ReturnFirstLetter), substr) || strings.Contains(XPinyin(s, ReturnNormal), substr)
+	return strings.Contains(s, substr) || strings.Contains(XPinyin(s, ReturnFirstLetter), substr) || strings.Contains(XPinyin(s, ReturnNormal), substr)
 }
 
 // 获取单个拼音中的声母
